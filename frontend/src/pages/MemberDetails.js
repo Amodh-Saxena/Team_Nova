@@ -79,13 +79,22 @@ function MemberDetails() {
           )}
         </div>
         
-        <button 
-          className="btn btn-primary" 
-          style={{ marginTop: '2rem', backgroundColor: '#ef4444', borderColor: '#ef4444' }} 
-          onClick={handleDelete}
-        >
-          Remove Member
-        </button>
+        <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem' }}>
+          <button 
+            className="btn btn-outline" 
+            onClick={() => navigate(`/edit/${id}`)}
+          >
+            Edit Details
+          </button>
+
+          <button 
+            className="btn btn-primary" 
+            style={{ backgroundColor: '#ef4444', borderColor: '#ef4444' }} 
+            onClick={handleDelete}
+          >
+            Remove Member
+          </button>
+        </div>
       </div>
     </div>
   );

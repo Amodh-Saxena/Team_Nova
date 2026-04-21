@@ -91,6 +91,45 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+// PUT /api/members/:id (Edit member details)
+router.put('/:id', upload.single('image'), async (req, res) => {
+    try {
+        const memberId = req.params.id;
+        const member = await Member.findById(memberId);
+        if (!member) {
+            return res.status(404).json({ error: 'Member not found' });
+        }
+
+        const updateData = {
+            name: req.body.name,
+            rollNumber: req.body.rollNumber,
+            year: req.body.year,
+            degree: req.body.degree,
+            project: req.body.project,
+            hobbies: req.body.hobbies,
+            certificate: req.body.certificate,
+            internship: req.body.internship,
+            aboutYourAim: req.body.aboutYourAim,
+            achievements: req.body.achievements,
+        };
+
+        // If a new image is provided, delete the old one from server
+        if (req.file) {
+            const oldImagePath = path.join(__dirname, '..', member.image);
+            if (fs.existsSync(oldImagePath)) {
+                fs.unlinkSync(oldImagePath);
+            }
+            updateData.image = req.file.path.replace(/\\/g, '/');
+        }
+
+        const updatedMember = await Member.findByIdAndUpdate(memberId, updateData, { new: true });
+        res.status(200).json(updatedMember);
+    } catch (error) {
+        console.error('Error updating member:', error);
+        res.status(500).json({ error: 'Failed to update member' });
+    }
+});
+
 // DELETE /api/members/:id (Delete a member)
 router.delete('/:id', async (req, res) => {
     try {

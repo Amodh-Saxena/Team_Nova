@@ -10,7 +10,7 @@ function ViewMembers() {
   useEffect(() => {
     const fetchMembers = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/members');
+        const response = await axios.get(`http://localhost:5000/api/members?t=${Date.now()}`);
         setMembers(response.data);
       } catch (error) {
         console.error('Error fetching members:', error);

@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import AddMember from './pages/AddMember';
 import ViewMembers from './pages/ViewMembers';
 import MemberDetails from './pages/MemberDetails';
+import EditMember from './pages/EditMember';
 import './index.css';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/add" element={<AddMember />} />
           <Route path="/view" element={<ViewMembers />} />
           <Route path="/member/:id" element={<MemberDetails />} />
+          <Route path="/edit/:id" element={<EditMember />} />
         </Routes>
       </div>
     </Router>
